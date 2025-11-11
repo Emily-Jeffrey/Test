@@ -1,11 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>QuickScore HRS - Hazard Ranking System</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p>beep beep beep</p>
+    <div class="container">
+        <div class="header">
+            <h1>EPA QuickScore - Hazard Ranking System</h1>
+            <div>Superfund Site Assessment Tool</div>
+        </div>
+        
+        <div class="nav">
+            <h3>Pathways</h3>
+            <a href="#" onclick="loadContent('site'); return false;">Site Information</a>
+            <a href="#" onclick="loadContent('groundwater'); return false;">Groundwater Migration</a>
+            <a href="#" onclick="loadContent('surface'); return false;">Surface Water</a>
+            <a href="#" onclick="loadContent('soil'); return false;">Soil Exposure</a>
+            <a href="#" onclick="loadContent('air'); return false;">Air Migration</a>
+            <a href="#" onclick="loadContent('calculate'); return false;">Calculate Score</a>
+        </div>
+        
+        <div class="content" id="contentArea">
+            <h2>Welcome to QuickScore</h2>
+            <p>Select a pathway from the navigation menu to begin site assessment.</p>
+        </div>
+    </div>
+    
+    <script>
+        function loadContent(section) {
+            const content = document.getElementById('contentArea');
+            
+            const sections = {
+                site: `
+                    <h2>Site Information</h2>
+                    <fieldset>
+                        <legend>Basic Site Data</legend>
+                        <label>Site Name: <input type="text" size="40"></label><br><br>
+                        <label>Site ID: <input type="text" size="20"></label><br><br>
+                        <label>State: <select>
+                            <option>Select...</option>
+                            <option>Alabama</option>
+                            <option>Alaska</option>
+                            <option>Arizona</option>
+                            <option>Arkansas</option>
+                            <option>California</option>
+                        </select></label>
+                    </fieldset>
+                `,
+                groundwater: `
+                    <h2>Groundwater Migration Pathway</h2>
+                    <fieldset>
+                        <legend>Likelihood of Release</legend>
+                        <label>Observed Release: 
+                            <input type="radio" name="release" value="yes"> Yes
+                            <input type="radio" name="release" value="no"> No
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Waste Characteristics</legend>
+                        <label>Hazardous Waste Quantity: <input type="text" size="15"></label>
+                    </fieldset>
+                `,
+                surface: `
+                    <h2>Surface Water Migration Pathway</h2>
+                    <fieldset>
+                        <legend>Likelihood of Release</legend>
+                        <label>Observed Release: 
+                            <input type="radio" name="sw_release" value="yes"> Yes
+                            <input type="radio" name="sw_release" value="no"> No
+                        </label>
+                    </fieldset>
+                `,
+                soil: `
+                    <h2>Soil Exposure Pathway</h2>
+                    <fieldset>
+                        <legend>Resident Population</legend>
+                        <label>Population within 200 feet: <input type="text" size="15"></label>
+                    </fieldset>
+                `,
+                air: `
+                    <h2>Air Migration Pathway</h2>
+                    <fieldset>
+                        <legend>Likelihood of Release</legend>
+                        <label>Observed Release: 
+                            <input type="radio" name="air_release" value="yes"> Yes
+                            <input type="radio" name="air_release" value="no"> No
+                        </label>
+                    </fieldset>
+                `,
+                calculate: `
+                    <h2>Calculate Site Score</h2>
+                    <fieldset>
+                        <legend>Pathway Scores</legend>
+                        <p>Groundwater Migration: <strong>0.00</strong></p>
+                        <p>Surface Water Migration: <strong>0.00</strong></p>
+                        <p>Soil Exposure: <strong>0.00</strong></p>
+                        <p>Air Migration: <strong>0.00</strong></p>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Overall Site Score</legend>
+                        <p style="font-size: 16px;"><strong>0.00</strong></p>
+                    </fieldset>
+                    <button>Calculate Scores</button>
+                    <button>Print Report</button>
+                `
+            };
+            
+            content.innerHTML = sections[section] || '<p>Content loading...</p>';
+        }
+    </script>
 </body>
 </html>
