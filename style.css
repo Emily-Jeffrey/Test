@@ -1,129 +1,179 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
-    font-size: 11px;
-    background: #C0C0C0;
+  font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  background: #c0c0c0;
 }
 
-/* Frame-like structure */
+
 .container {
-    display: grid;
-    grid-template-areas:
-        "header header"
-        "nav content";
-    grid-template-rows: 80px calc(100vh - 80px);
-    grid-template-columns: 200px 1fr;
-    height: 100vh;
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "nav content";
+  grid-template-rows: 80px calc(100vh - 80px);
+  grid-template-columns: 200px 1fr;
+  height: 100vh;
 }
+
 
 .header {
-    grid-area: header;
-    background: #000080;
-    color: white;
-    padding: 10px 20px;
-    border-bottom: 2px solid #808080;
+  grid-area: header;
+  background: #000080;
+  color: white;
+  padding: 10px 20px;
+  border-bottom: 2px solid #808080;
 }
 
 .header h1 {
-    font-size: 18px;
-    margin-bottom: 5px;
+  font-size: 18px;
+  margin-bottom: 5px;
 }
 
+
 .nav {
-    grid-area: nav;
-    background: #C0C0C0;
-    border-right: 2px solid #808080;
-    overflow-y: auto;
-    padding: 10px;
+  grid-area: nav;
+  background: #c0c0c0;
+  border-right: 2px solid #808080;
+  overflow-y: auto;
+  padding: 10px;
 }
 
 .nav h3 {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
-.nav a {
-    display: block;
-    padding: 5px;
-    margin: 2px 0;
-    color: #0000EE;
-    text-decoration: none;
-    background: #FFFFFF;
-    border: 1px solid #808080;
+
+.nav a,
+.nav-link {
+  display: block;
+  padding: 5px;
+  margin: 2px 0;
+  color: #0000ee;
+  text-decoration: none;
+  background: #ffffff;
+  border: 1px solid #808080;
+  cursor: pointer;
 }
 
-.nav a:hover {
-    background: #000080;
-    color: white;
+
+.nav a:hover,
+.nav-link:hover {
+  background: #000080;
+  color: white;
 }
+
+
+.nav-groundwater:hover {
+  cursor: url("cursors/sea-wave.png"), pointer;
+}
+
+
+
 
 .content {
-    grid-area: content;
-    background: white;
-    overflow-y: auto;
-    padding: 20px;
+  grid-area: content;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
 }
 
-.content h2 {
-    font-size: 14px;
-    margin-bottom: 15px;
-    color: #000080;
+
+.background-slider {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 
-.content p {
-    margin-bottom: 10px;
-    line-height: 1.4;
+.background-slider .slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
 }
 
-/* Classic Windows 95/98 form styling */
-input[type="text"], 
-select, 
+
+.background-slider .slide.active {
+  opacity: 0.3;
+}
+
+
+.content-inner {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  background: transparent;
+}
+
+.content-inner h2 {
+  font-size: 14px;
+  margin-bottom: 15px;
+  color: #000080;
+}
+
+.content-inner p {
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+
+input[type="text"],
+select,
 textarea {
-    border: 2px inset #DFDFDF;
-    padding: 2px;
-    font-family: "MS Sans Serif", Arial;
-    font-size: 11px;
+  border: 2px inset #dfdfdf;
+  padding: 2px;
+  font-family: "MS Sans Serif", Arial;
+  font-size: 11px;
 }
 
 input[type="radio"] {
-    margin: 0 3px 0 10px;
+  margin: 0 3px 0 10px;
 }
 
 button {
-    background: #C0C0C0;
-    border: 2px outset #FFFFFF;
-    padding: 3px 10px;
-    font-family: "MS Sans Serif", Arial;
-    font-size: 11px;
-    cursor: pointer;
-    margin-right: 5px;
+  background: #c0c0c0;
+  border: 2px outset #ffffff;
+  padding: 3px 10px;
+  font-family: "MS Sans Serif", Arial;
+  font-size: 11px;
+  cursor: pointer;
+  margin-right: 5px;
 }
 
 button:active {
-    border-style: inset;
+  border-style: inset;
 }
 
 button:hover {
-    background: #D0D0D0;
+  background: #d0d0d0;
 }
 
 fieldset {
-    border: 2px groove #DFDFDF;
-    padding: 10px;
-    margin: 10px 0;
-    background: #F0F0F0;
+  border: 2px groove #dfdfdf;
+  padding: 10px;
+  margin: 10px 0;
+  background: #f0f0f0;
 }
 
 legend {
-    font-weight: bold;
-    padding: 0 5px;
+  font-weight: bold;
+  padding: 0 5px;
 }
 
 label {
-    display: inline-block;
-    margin-bottom: 5px;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+/* TEMP: test cursor on whole page */
+body {
+  cursor: url("cursors/address-pin.png"), auto;
 }
