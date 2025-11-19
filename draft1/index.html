@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>QuickScore HRS - Hazard Ranking System</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>EPA QuickScore - Hazard Ranking System</h1>
+        <div>Superfund Site Assessment Tool</div>
+      </div>
+
+      <div class="nav">
+        <h3>Pathways</h3>
+        <a
+          href="#"
+          class="nav-link nav-site"
+          onclick="loadContent('site'); return false;"
+          >Site Information</a
+        >
+        <a
+          href="#"
+          class="nav-link nav-groundwater"
+          onclick="loadContent('groundwater'); return false;"
+          >Groundwater Migration</a
+        >
+        <a
+          href="#"
+          class="nav-link nav-surface"
+          onclick="loadContent('surface'); return false;"
+          >Surface Water</a
+        >
+        <a
+          href="#"
+          class="nav-link nav-soil"
+          onclick="loadContent('soil'); return false;"
+          >Soil Exposure</a
+        >
+        <a
+          href="#"
+          class="nav-link nav-air"
+          onclick="loadContent('air'); return false;"
+          >Air Migration</a
+        >
+        <a
+          href="#"
+          class="nav-link nav-calculate"
+          onclick="loadContent('calculate'); return false;"
+          >Calculate Score</a
+        >
+      </div>
+
+      <div class="content">
+        <div class="background-slider">
+          <div
+            class="slide active"
+            style="background-image: url('Gowanus images/image 1.png')"
+          ></div>
+          <div
+            class="slide"
+            style="background-image: url('Gowanus images/image 2.png')"
+          ></div>
+          <div
+            class="slide"
+            style="background-image: url('Gowanus images/image 3.png')"
+          ></div>
+        </div>
+
+        <div class="content-inner" id="contentArea">
+          <h2>Welcome to QuickScore</h2>
+          <p>
+            Select a pathway from the navigation menu to begin site assessment.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

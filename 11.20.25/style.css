@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+    font-family: 'Courier New', monospace;
+}
+
+/* Container that scales to fit viewport */
+#interface-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1920px;
+    height: 1080px;
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
+#computer-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 1080px;
+    z-index: 1;
+}
+
+/* Canvas for knob indicators - must match container dimensions exactly */
+#knob-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Text display in CRT screen */
+#text-display {
+    position: absolute;
+    top: 200px;
+    left: 600px;
+    width: 640px;
+    height: 390px;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#generated-text {
+    display: inline-block;
+    background: white;
+    color: black;
+    padding: 0px 6px;
+    font-size: 16px;
+    line-height: 1.4;
+    max-width: 100%;
+    /* Optional: add slight shadow for depth */
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.989);
+    text-shadow: 0 0 2px #000000;
+}
+
+/* Year display */
+#year-display {
+    position: absolute;
+    top: 130px;
+    right: 215px;
+    width: 180px;
+    height: 90px;
+    background: rgba(0, 26, 0, 0.8);
+    color: #ffffff;
+    font-size: 48px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    text-shadow: 0 0 10px #ffaa00;
+}
+
+/* Knob images that rotate */
+.knob-img {
+    position: absolute;
+    width: 80px;  /* Adjust to match your PNG size */
+    height: 80px;
+    transform-origin: center center;
+    z-index: 9;  /* Below canvas (10) but above background */
+    pointer-events: none;
+}
+
+#knob1-img {
+    top: 214px;  /* Same as knob1-debug */
+    left: 1359px;
+}
+
+#knob2-img {
+    top: 360px;  /* Same as knob2-debug */
+    left: 1359px;
+}
+
+/* ON/OFF Toggle */
+#toggle-switch {
+    position: absolute;
+    top: 580px;  /* Adjust to where your toggle is */
+    left: 1359px;  /* Adjust to where your toggle is */
+    width: 80px;
+    height: 115px;
+    cursor: pointer;
+    z-index: 20;
+}
+
+.toggle-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.toggle-img.active {
+    opacity: 1;
+}
+
+/* Powered off state - invisible */
+.powered-off {
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+/* Make knobs inactive when powered off */
+body.system-off #knob-canvas {
+    pointer-events: none;
+}
