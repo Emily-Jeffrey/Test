@@ -1,179 +1,236 @@
-* {
+/* ---- GLOBAL RESET ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+/* ---- PAGE + STRUCTURE ---- */
+
+html,
+body {
+  height: 100%;
 }
 
 body {
-  font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
-  font-size: 11px;
-  background: #c0c0c0;
+  height: 100vh; /* lock to viewport */
+  overflow: hidden; /* no scrolling */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  position: relative;
+  background: #000; /* fallback behind bg image */
 }
 
+/* Background image element (image 2) */
+.background-image {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* sit behind everything */
+}
 
-.container {
+/* Main page grid */
+.page {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-areas:
-    "header header"
-    "nav content";
-  grid-template-rows: 80px calc(100vh - 80px);
-  grid-template-columns: 200px 1fr;
-  height: 100vh;
+  grid-template-columns: 15vw 1fr 15vw; /* left | center | right */
+  column-gap: 1rem;
+  padding: 1rem;
+  height: 100%;
 }
 
-
-.header {
-  grid-area: header;
-  background: #000080;
-  color: white;
-  padding: 10px 20px;
-  border-bottom: 2px solid #808080;
+/* Allow children to shrink instead of spilling */
+.side-column,
+.center-column,
+.center-column > section {
+  min-height: 0;
 }
 
-.header h1 {
-  font-size: 18px;
-  margin-bottom: 5px;
+/* Outline boxes like your diagrams */
+.side-column,
+.center-column > section {
+  border: 1px solid #333;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
-
-.nav {
-  grid-area: nav;
-  background: #c0c0c0;
-  border-right: 2px solid #808080;
-  overflow-y: auto;
-  padding: 10px;
+/* LEFT + RIGHT COLUMNS */
+.side-column {
+  display: flex;
+  flex-direction: column;
 }
 
-.nav h3 {
-  margin-bottom: 10px;
+/* CENTER COLUMN STACK: top / middle / bottom */
+.center-column {
+  display: grid;
+  grid-template-rows: 1.4fr 1.6fr 1.4fr; /* relative heights */
+  row-gap: 1rem;
 }
 
+/* ---- MIDDLE THREE BOXES ---- */
 
-.nav a,
-.nav-link {
-  display: block;
-  padding: 5px;
-  margin: 2px 0;
-  color: #0000ee;
-  text-decoration: none;
-  background: #ffffff;
-  border: 1px solid #808080;
-  cursor: pointer;
+.middle-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1rem;
+  padding: 1rem;
+  min-height: 0;
 }
 
-
-.nav a:hover,
-.nav-link:hover {
-  background: #000080;
-  color: white;
-}
-
-
-.nav-groundwater:hover {
-  cursor: url("cursors/sea-wave.png"), pointer;
-}
-
-
-
-
-.content {
-  grid-area: content;
+.center-box {
+  border: 1px solid #333;
   position: relative;
   overflow: hidden;
-  background: transparent;
 }
 
+/* Images in middle boxes: fill + fade */
+.middle-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: fadeInOut 8s ease-in-out infinite;
+}
 
-.background-slider {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
+/* Stagger the fades a bit */
+.middle-row .center-box:nth-child(2) .middle-img {
+  animation-delay: 1.5s;
+}
+
+.middle-row .center-box:nth-child(3) .middle-img {
+  animation-delay: 3s;
+}
+
+/* Fade in/out animation */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---- TICKER COMMON STYLES ---- */
+
+.ticker-horizontal,
+.ticker-vertical {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* moving track */
+.ticker-track {
+  display: flex;
+}
+
+/* each slice wrapper */
+.ticker-item {
+  position: relative;
+}
+
+/* ticker images must fill their slices */
+.ticker-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
   pointer-events: none;
 }
 
-.background-slider .slide {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+/* horizontal tickers = multiple columns */
+.ticker-horizontal .ticker-track {
+  height: 100%;
+  align-items: stretch;
+}
+
+.ticker-horizontal .ticker-item {
+  flex: 0 0 25%; /* 4 vertical slices across */
+}
+
+/* vertical tickers = multiple rows */
+.ticker-vertical .ticker-track {
+  flex-direction: column;
+  width: 100%;
+}
+
+.ticker-vertical .ticker-item {
+  flex: 0 0 25%; /* 4 horizontal slices down */
+}
+
+/* ---- ANIMATIONS FOR TICKERS ---- */
+
+:root {
+  --ticker-duration-slow: 10s;
+}
+
+/* Horizontal left */
+.ticker-left .ticker-track {
+  animation: scroll-left var(--ticker-duration-slow) linear infinite;
+}
+
+/* Horizontal right */
+.ticker-right .ticker-track {
+  animation: scroll-right var(--ticker-duration-slow) linear infinite;
+}
+
+/* Vertical up */
+.ticker-up .ticker-track {
+  animation: scroll-up var(--ticker-duration-slow) linear infinite;
+}
+
+/* Vertical down */
+.ticker-down .ticker-track {
+  animation: scroll-down var(--ticker-duration-slow) linear infinite;
+}
+
+/* We duplicate the content in HTML, so shifting by 50% loops seamlessly */
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes scroll-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes scroll-down {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 
-.background-slider .slide.active {
-  opacity: 0.3;
-}
-
-
-.content-inner {
-  position: relative;
-  z-index: 2;
-  padding: 20px;
-  background: transparent;
-}
-
-.content-inner h2 {
-  font-size: 14px;
-  margin-bottom: 15px;
-  color: #000080;
-}
-
-.content-inner p {
-  margin-bottom: 10px;
-  line-height: 1.4;
-}
-
-
-input[type="text"],
-select,
-textarea {
-  border: 2px inset #dfdfdf;
-  padding: 2px;
-  font-family: "MS Sans Serif", Arial;
-  font-size: 11px;
-}
-
-input[type="radio"] {
-  margin: 0 3px 0 10px;
-}
-
-button {
-  background: #c0c0c0;
-  border: 2px outset #ffffff;
-  padding: 3px 10px;
-  font-family: "MS Sans Serif", Arial;
-  font-size: 11px;
-  cursor: pointer;
-  margin-right: 5px;
-}
-
-button:active {
-  border-style: inset;
-}
-
-button:hover {
-  background: #d0d0d0;
-}
-
-fieldset {
-  border: 2px groove #dfdfdf;
-  padding: 10px;
-  margin: 10px 0;
-  background: #f0f0f0;
-}
-
-legend {
-  font-weight: bold;
-  padding: 0 5px;
-}
-
-label {
-  display: inline-block;
-  margin-bottom: 5px;
-}
-
-/* TEMP: test cursor on whole page */
-body {
-  cursor: url("cursors/address-pin.png"), auto;
-}

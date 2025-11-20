@@ -2,81 +2,188 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>QuickScore HRS - Hazard Ranking System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Ticker Layout</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="header">
-        <h1>EPA QuickScore - Hazard Ranking System</h1>
-        <div>Superfund Site Assessment Tool</div>
-      </div>
+    <!-- BACKGROUND IMAGE -->
+    <img
+      src="Gowanus images/image 2.png"
+      alt="Background"
+      class="background-image"
+    />
 
-      <div class="nav">
-        <h3>Pathways</h3>
-        <a
-          href="#"
-          class="nav-link nav-site"
-          onclick="loadContent('site'); return false;"
-          >Site Information</a
-        >
-        <a
-          href="#"
-          class="nav-link nav-groundwater"
-          onclick="loadContent('groundwater'); return false;"
-          >Groundwater Migration</a
-        >
-        <a
-          href="#"
-          class="nav-link nav-surface"
-          onclick="loadContent('surface'); return false;"
-          >Surface Water</a
-        >
-        <a
-          href="#"
-          class="nav-link nav-soil"
-          onclick="loadContent('soil'); return false;"
-          >Soil Exposure</a
-        >
-        <a
-          href="#"
-          class="nav-link nav-air"
-          onclick="loadContent('air'); return false;"
-          >Air Migration</a
-        >
-        <a
-          href="#"
-          class="nav-link nav-calculate"
-          onclick="loadContent('calculate'); return false;"
-          >Calculate Score</a
-        >
-      </div>
-
-      <div class="content">
-        <div class="background-slider">
-          <div
-            class="slide active"
-            style="background-image: url('Gowanus images/image 1.png')"
-          ></div>
-          <div
-            class="slide"
-            style="background-image: url('Gowanus images/image 2.png')"
-          ></div>
-          <div
-            class="slide"
-            style="background-image: url('Gowanus images/image 3.png')"
-          ></div>
+    <div class="page">
+      <!-- LEFT COLUMN – vertical ticker going UP -->
+      <aside class="side-column side-left">
+        <div class="ticker-vertical ticker-up">
+          <div class="ticker-track">
+            <!-- first set -->
+            <div class="ticker-item">
+              <img src="Gowanus images/image 4.png" alt="Image 4" />
+            </div>
+            <div class="ticker-item">
+              <img src="Gowanus images/image 6.png" alt="Image 6" />
+            </div>
+            <div class="ticker-item">
+              <img src="Gowanus images/image 1.png" alt="Image 1" />
+            </div>
+            <div class="ticker-item">
+              <img src="Gowanus images/Image 7.JPEG" alt="Image 7" />
+            </div>
+            <!-- duplicate set for seamless loop -->
+            <div class="ticker-item">
+              <img src="Gowanus images/image 4.png" alt="Image 4" />
+            </div>
+            <div class="ticker-item">
+              <img src="Gowanus images/image 6.png" alt="Image 6" />
+            </div>
+            <div class="ticker-item">
+              <img src="Gowanus images/image 1.png" alt="Image 1" />
+            </div>
+            <div class="ticker-item">
+              <img src="Gowanus images/Image 7.JPEG" alt="Image 7" />
+            </div>
+          </div>
         </div>
+      </aside>
 
-        <div class="content-inner" id="contentArea">
-          <h2>Welcome to QuickScore</h2>
-          <p>
-            Select a pathway from the navigation menu to begin site assessment.
-          </p>
+      <!-- CENTER COLUMN -->
+      <main class="center-column">
+        <!-- TOP WIDE BOX – horizontal ticker to the LEFT -->
+        <section class="top-row">
+          <div class="ticker-horizontal ticker-left">
+            <div class="ticker-track">
+              <!-- first set -->
+              <div class="ticker-item">
+                <img src="Gowanus images/image 1.png" alt="Image 1" />
+              </div>
+              <div class="ticker-item">
+                <img src="Gowanus images/image 3.png" alt="Image 3" />
+              </div>
+              <div class="ticker-item">
+                <img src="Gowanus images/image 5.jpg" alt="Image 5" />
+              </div>
+              <div class="ticker-item">
+                <img src="Gowanus images/Image 7.JPEG" alt="Image 7" />
+              </div>
+              <!-- duplicate set -->
+              <div class="ticker-item">
+                <img src="Gowanus images/image 1.png" alt="Image 1" />
+              </div>
+              <div class="ticker-item">
+                <img src="Gowanus images/image 3.png" alt="Image 3" />
+              </div>
+              <div class="ticker-item">
+                <img src="Gowanus images/image 5.jpg" alt="Image 5" />
+              </div>
+              <div class="ticker-item">
+                <img src="Gowanus images/Image 7.JPEG" alt="Image 7" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- MIDDLE THREE BOXES -->
+        <section class="middle-row">
+          <div class="center-box">
+            <img
+              src="Gowanus images/image 2.png"
+              alt="Image 1"
+              class="middle-img"
+            />
+          </div>
+          <div class="center-box">
+            <img
+              src="Gowanus images/image 1.png"
+              alt="Image 1"
+              class="middle-img"
+            />
+          </div>
+          <div class="center-box">
+            <img
+              src="Gowanus images/image 6.png"
+              alt="Image 6"
+              class="middle-img"
+            />
+          </div>
+        </section>
+
+        <!-- BOTTOM WIDE BOX – horizontal ticker to the RIGHT -->
+        <section class="bottom-row">
+          <div class="ticker-horizontal ticker-right">
+            <div class="ticker-track">
+              <!-- first set -->
+              <div class="ticker-item">
+                <img src="Gowanus images/Image 7.JPEG" alt="Image 7" />
+              </div>
+              <div class="ticker-item">
+                <img src="Gowanus images/image 1.png" alt="Image 1" />
+              </div>
+              <div class="ticker-item">
+                <img src="Gowanus images/image 6.png" alt="Image 6" />
+              </div>
+              <div class="ticker-item">
+                <img src="Gowanus images/image 3.png" alt="Image 3" />
+              </div>
+              <div class="ticker-item">
+                <img src="Gowanus images/image 5.jpg" alt="Image 5" />
+              </div>
+              <!-- duplicate set -->
+              <div class="ticker-item">
+                <img src="Gowanus images/Image 7.JPEG" alt="Image 7" />
+              </div>
+              <div class="ticker-item">
+                <img src="Gowanus images/image 1.png" alt="Image 1" />
+              </div>
+              <div class="ticker-item">
+                <img src="Gowanus images/image 6.png" alt="Image 6" />
+              </div>
+              <div class="ticker-item">
+                <img src="Gowanus images/image 5.jpg" alt="Image 5" />
+              </div>
+              <div class="ticker-item">
+                <img src="Gowanus images/image 5.jpg" alt="Image 5" />
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- RIGHT COLUMN – vertical ticker going DOWN -->
+      <aside class="side-column side-right">
+        <div class="ticker-vertical ticker-down">
+          <div class="ticker-track">
+            <!-- first set -->
+            <div class="ticker-item">
+              <img src="Gowanus images/image 5.jpg" alt="Image 5" />
+            </div>
+            <div class="ticker-item">
+              <img src="Gowanus images/image 3.png" alt="Image 3" />
+            </div>
+            <div class="ticker-item">
+              <img src="Gowanus images/image 4.png" alt="Image 4" />
+            </div>
+            <div class="ticker-item">
+              <img src="Gowanus images/image 6.png" alt="Image 6" />
+            </div>
+            <!-- duplicate set -->
+            <div class="ticker-item">
+              <img src="Gowanus images/image 5.jpg" alt="Image 5" />
+            </div>
+            <div class="ticker-item">
+              <img src="Gowanus images/image 3.png" alt="Image 3" />
+            </div>
+            <div class="ticker-item">
+              <img src="Gowanus images/image 4.png" alt="Image 4" />
+            </div>
+            <div class="ticker-item">
+              <img src="Gowanus images/image 6.png" alt="Image 6" />
+            </div>
+          </div>
         </div>
-      </div>
+      </aside>
     </div>
-
-    <script src="script.js"></script>
   </body>
 </html>
