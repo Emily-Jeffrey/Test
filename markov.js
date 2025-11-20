@@ -98,34 +98,41 @@ class MarkovGenerator {
     }
     
     static combine(models, weights) {
-        // IMPROVED: Better combining strategy that preserves chain connectivity
         const combined = new MarkovGenerator(null);
         combined.stateSize = models[0].stateSize;
+        
+        // Calculate total chain sizes for normalization
+        const chainSizes = models.map(model => Object.keys(model.chain).length);
+        const totalChainSize = chainSizes.reduce((a, b) => a + b, 0);
         
         models.forEach((model, idx) => {
             const weight = weights[idx];
             
-            if (weight === 0) return; // Skip models with 0 weight
+            if (weight === 0) return;
             
-            // Add beginnings proportionally
-            const numBeginnings = Math.max(1, Math.floor(model.beginnings.length * weight * 10));
+            // Normalize weight by corpus size
+            const sizeRatio = chainSizes[idx] / totalChainSize;
+            const normalizedWeight = weight / sizeRatio;
+            
+            console.log(`Model ${idx}: weight=${weight}, size=${chainSizes[idx]}, normalized=${normalizedWeight.toFixed(3)}`);
+            
+            // Add beginnings proportionally with normalized weight
+            const numBeginnings = Math.max(1, Math.floor(model.beginnings.length * normalizedWeight * 5));
             for (let i = 0; i < numBeginnings; i++) {
                 const beginning = model.beginnings[Math.floor(Math.random() * model.beginnings.length)];
                 combined.beginnings.push(beginning);
             }
             
-            // Add ALL states but duplicate choices based on weight
+            // Add chain entries with normalized weight
             Object.keys(model.chain).forEach(state => {
                 if (!combined.chain[state]) {
                     combined.chain[state] = [];
                 }
                 
                 const choices = model.chain[state];
-                // Add more copies of choices based on weight
-                const numCopies = Math.max(1, Math.floor(weight * 20));
+                const numCopies = Math.max(1, Math.floor(normalizedWeight * 10));
                 
                 for (let copy = 0; copy < numCopies; copy++) {
-                    // Add ALL choices from this model for this state
                     combined.chain[state].push(...choices);
                 }
             });
