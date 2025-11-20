@@ -1,236 +1,173 @@
-/* ---- GLOBAL RESET ---- */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* ---- PAGE + STRUCTURE ---- */
-
-html,
-body {
-  height: 100%;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  height: 100vh; /* lock to viewport */
-  overflow: hidden; /* no scrolling */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  position: relative;
-  background: #000; /* fallback behind bg image */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+    font-family: 'Courier New', monospace;
 }
 
-/* Background image element (image 2) */
-.background-image {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1; /* sit behind everything */
+/* Container that scales to fit viewport */
+#iface-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1920px;
+    height: 1080px;
+    transform: translate(-50%, -50%) scale(0.8);
 }
 
-/* Main page grid */
-.page {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 15vw 1fr 15vw; /* left | center | right */
-  column-gap: 1rem;
-  padding: 1rem;
-  height: 100%;
+#interface-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1920px;
+    height: 1080px;
+    transform: translate(-50%, -50%) scale(0.8);
 }
 
-/* Allow children to shrink instead of spilling */
-.side-column,
-.center-column,
-.center-column > section {
-  min-height: 0;
+#computer-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 1080px;
+    z-index: 1;
 }
 
-/* Outline boxes like your diagrams */
-.side-column,
-.center-column > section {
-  border: 1px solid #333;
-  background-color: rgba(255, 255, 255, 0.9);
+/* Canvas for knob indicators - must match container dimensions exactly */
+#knob-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
 }
 
-/* LEFT + RIGHT COLUMNS */
-.side-column {
-  display: flex;
-  flex-direction: column;
+/* Text display in CRT screen */
+#text-display {
+    position: absolute;
+    top: 200px;
+    left: 600px;
+    width: 640px;
+    height: 390px;
+    padding: 0;
+    overflow: hidden;
+    background: #000000;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* CENTER COLUMN STACK: top / middle / bottom */
-.center-column {
-  display: grid;
-  grid-template-rows: 1.4fr 1.6fr 1.4fr; /* relative heights */
-  row-gap: 1rem;
+#generated-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.92);
+    color: black;
+    padding: 6px 10px;
+    font-size: 15px;
+    line-height: 1.4;
+    max-width: calc(100% - 60px);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 0 2px #000000;
 }
 
-/* ---- MIDDLE THREE BOXES ---- */
-
-.middle-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 1rem;
-  padding: 1rem;
-  min-height: 0;
+/* Year display */
+#year-display {
+    position: absolute;
+    top: 130px;
+    right: 215px;
+    width: 180px;
+    height: 90px;
+    background: rgba(0, 26, 0, 0.8);
+    color: #ffffff;
+    font-size: 48px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    text-shadow: 0 0 10px #ffaa00;
 }
 
-.center-box {
-  border: 1px solid #333;
-  position: relative;
-  overflow: hidden;
+/* Knob images that rotate */
+.knob-img {
+    position: absolute;
+    width: 80px;  /* Adjust to match your PNG size */
+    height: 80px;
+    transform-origin: center center;
+    z-index: 9;  /* Below canvas (10) but above background */
+    pointer-events: none;
 }
 
-/* Images in middle boxes: fill + fade */
-.middle-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  animation: fadeInOut 8s ease-in-out infinite;
+#knob1-img {
+    top: 214px;  /* Same as knob1-debug */
+    left: 1359px;
 }
 
-/* Stagger the fades a bit */
-.middle-row .center-box:nth-child(2) .middle-img {
-  animation-delay: 1.5s;
+#knob2-img {
+    top: 360px;  /* Same as knob2-debug */
+    left: 1359px;
 }
 
-.middle-row .center-box:nth-child(3) .middle-img {
-  animation-delay: 3s;
+#knob3-img {
+    top: 500px;
+    left: 1359px;
 }
 
-/* Fade in/out animation */
-@keyframes fadeInOut {
-  0% {
+/* ON/OFF Toggle */
+#toggle-switch {
+    position: absolute;
+    top: 580px;  /* Adjust to where your toggle is */
+    left: 1359px;  /* Adjust to where your toggle is */
+    width: 80px;
+    height: 115px;
+    cursor: pointer;
+    z-index: 20;
+}
+
+.toggle-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     opacity: 0;
-  }
-  25% {
+    transition: opacity 0.3s ease;
+}
+
+.toggle-img.active {
     opacity: 1;
-  }
-  75% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
 }
 
-/* ---- TICKER COMMON STYLES ---- */
-
-.ticker-horizontal,
-.ticker-vertical {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+/* Powered off state - invisible */
+.powered-off {
+    opacity: 0 !important;
+    pointer-events: none;
 }
 
-/* moving track */
-.ticker-track {
-  display: flex;
+/* Make knobs inactive when powered off */
+body.system-off #knob-canvas {
+    pointer-events: none;
 }
 
-/* each slice wrapper */
-.ticker-item {
-  position: relative;
+#slideshow-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    display: block;
+    margin: auto;
 }
-
-/* ticker images must fill their slices */
-.ticker-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  pointer-events: none;
-}
-
-/* horizontal tickers = multiple columns */
-.ticker-horizontal .ticker-track {
-  height: 100%;
-  align-items: stretch;
-}
-
-.ticker-horizontal .ticker-item {
-  flex: 0 0 25%; /* 4 vertical slices across */
-}
-
-/* vertical tickers = multiple rows */
-.ticker-vertical .ticker-track {
-  flex-direction: column;
-  width: 100%;
-}
-
-.ticker-vertical .ticker-item {
-  flex: 0 0 25%; /* 4 horizontal slices down */
-}
-
-/* ---- ANIMATIONS FOR TICKERS ---- */
-
-:root {
-  --ticker-duration-slow: 10s;
-}
-
-/* Horizontal left */
-.ticker-left .ticker-track {
-  animation: scroll-left var(--ticker-duration-slow) linear infinite;
-}
-
-/* Horizontal right */
-.ticker-right .ticker-track {
-  animation: scroll-right var(--ticker-duration-slow) linear infinite;
-}
-
-/* Vertical up */
-.ticker-up .ticker-track {
-  animation: scroll-up var(--ticker-duration-slow) linear infinite;
-}
-
-/* Vertical down */
-.ticker-down .ticker-track {
-  animation: scroll-down var(--ticker-duration-slow) linear infinite;
-}
-
-/* We duplicate the content in HTML, so shifting by 50% loops seamlessly */
-@keyframes scroll-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes scroll-right {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes scroll-up {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-50%);
-  }
-}
-
-@keyframes scroll-down {
-  from {
-    transform: translateY(-50%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-

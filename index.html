@@ -3,187 +3,100 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Multi-Ticker Layout</title>
+    <title>Gowanus Canal Futures</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- BACKGROUND IMAGE -->
-    <img
-      src="Gowanus images/image 2.png"
-      alt="Background"
-      class="background-image"
-    />
+    <div id="interface-container">
+      <img
+        id="computer-background"
+        src="images/COMPUTERBACKGROUND.png"
+        alt="Computer"
+      />
 
-    <div class="page">
-      <!-- LEFT COLUMN – vertical ticker going UP -->
-      <aside class="side-column side-left">
-        <div class="ticker-vertical ticker-up">
-          <div class="ticker-track">
-            <!-- first set -->
-            <div class="ticker-item">
-              <img src="Gowanus images/image 4.png" alt="Image 4" />
-            </div>
-            <div class="ticker-item">
-              <img src="Gowanus images/image 6.png" alt="Image 6" />
-            </div>
-            <div class="ticker-item">
-              <img src="Gowanus images/image 1.png" alt="Image 1" />
-            </div>
-            <div class="ticker-item">
-              <img src="Gowanus images/Image 7.JPEG" alt="Image 7" />
-            </div>
-            <!-- duplicate set for seamless loop -->
-            <div class="ticker-item">
-              <img src="Gowanus images/image 4.png" alt="Image 4" />
-            </div>
-            <div class="ticker-item">
-              <img src="Gowanus images/image 6.png" alt="Image 6" />
-            </div>
-            <div class="ticker-item">
-              <img src="Gowanus images/image 1.png" alt="Image 1" />
-            </div>
-            <div class="ticker-item">
-              <img src="Gowanus images/Image 7.JPEG" alt="Image 7" />
-            </div>
-          </div>
-        </div>
-      </aside>
+      <!-- ON/OFF Toggle -->
+      <div id="toggle-switch" class="toggle-off">
+        <img
+          id="toggle-off-img"
+          src="images/off.png"
+          alt="OFF"
+          class="toggle-img active"
+        />
+        <img
+          id="toggle-on-img"
+          src="images/on.png"
+          alt="ON"
+          class="toggle-img"
+        />
+      </div>
 
-      <!-- CENTER COLUMN -->
-      <main class="center-column">
-        <!-- TOP WIDE BOX – horizontal ticker to the LEFT -->
-        <section class="top-row">
-          <div class="ticker-horizontal ticker-left">
-            <div class="ticker-track">
-              <!-- first set -->
-              <div class="ticker-item">
-                <img src="Gowanus images/image 1.png" alt="Image 1" />
-              </div>
-              <div class="ticker-item">
-                <img src="Gowanus images/image 3.png" alt="Image 3" />
-              </div>
-              <div class="ticker-item">
-                <img src="Gowanus images/image 5.jpg" alt="Image 5" />
-              </div>
-              <div class="ticker-item">
-                <img src="Gowanus images/Image 7.JPEG" alt="Image 7" />
-              </div>
-              <!-- duplicate set -->
-              <div class="ticker-item">
-                <img src="Gowanus images/image 1.png" alt="Image 1" />
-              </div>
-              <div class="ticker-item">
-                <img src="Gowanus images/image 3.png" alt="Image 3" />
-              </div>
-              <div class="ticker-item">
-                <img src="Gowanus images/image 5.jpg" alt="Image 5" />
-              </div>
-              <div class="ticker-item">
-                <img src="Gowanus images/Image 7.JPEG" alt="Image 7" />
-              </div>
-            </div>
-          </div>
-        </section>
+      <!-- Knob images that rotate -->
+      <img
+        id="knob1-img"
+        class="knob-img"
+        src="images/knob1.png"
+        alt="Year Knob"
+      />
+      <img
+        id="knob2-img"
+        class="knob-img"
+        src="images/knob2.png"
+        alt="Length Knob"
+      />
+      <img
+        id="knob3-img"
+        class="knob-img"
+        src="images/knob2.png"
+        alt="Volume Knob"
+      />
 
-        <!-- MIDDLE THREE BOXES -->
-        <section class="middle-row">
-          <div class="center-box">
-            <img
-              src="Gowanus images/image 2.png"
-              alt="Image 1"
-              class="middle-img"
-            />
-          </div>
-          <div class="center-box">
-            <img
-              src="Gowanus images/image 1.png"
-              alt="Image 1"
-              class="middle-img"
-            />
-          </div>
-          <div class="center-box">
-            <img
-              src="Gowanus images/image 6.png"
-              alt="Image 6"
-              class="middle-img"
-            />
-          </div>
-        </section>
+      <canvas id="knob-canvas"></canvas>
 
-        <!-- BOTTOM WIDE BOX – horizontal ticker to the RIGHT -->
-        <section class="bottom-row">
-          <div class="ticker-horizontal ticker-right">
-            <div class="ticker-track">
-              <!-- first set -->
-              <div class="ticker-item">
-                <img src="Gowanus images/Image 7.JPEG" alt="Image 7" />
-              </div>
-              <div class="ticker-item">
-                <img src="Gowanus images/image 1.png" alt="Image 1" />
-              </div>
-              <div class="ticker-item">
-                <img src="Gowanus images/image 6.png" alt="Image 6" />
-              </div>
-              <div class="ticker-item">
-                <img src="Gowanus images/image 3.png" alt="Image 3" />
-              </div>
-              <div class="ticker-item">
-                <img src="Gowanus images/image 5.jpg" alt="Image 5" />
-              </div>
-              <!-- duplicate set -->
-              <div class="ticker-item">
-                <img src="Gowanus images/Image 7.JPEG" alt="Image 7" />
-              </div>
-              <div class="ticker-item">
-                <img src="Gowanus images/image 1.png" alt="Image 1" />
-              </div>
-              <div class="ticker-item">
-                <img src="Gowanus images/image 6.png" alt="Image 6" />
-              </div>
-              <div class="ticker-item">
-                <img src="Gowanus images/image 5.jpg" alt="Image 5" />
-              </div>
-              <div class="ticker-item">
-                <img src="Gowanus images/image 5.jpg" alt="Image 5" />
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
+      <div id="year-display">2025</div>
 
-      <!-- RIGHT COLUMN – vertical ticker going DOWN -->
-      <aside class="side-column side-right">
-        <div class="ticker-vertical ticker-down">
-          <div class="ticker-track">
-            <!-- first set -->
-            <div class="ticker-item">
-              <img src="Gowanus images/image 5.jpg" alt="Image 5" />
-            </div>
-            <div class="ticker-item">
-              <img src="Gowanus images/image 3.png" alt="Image 3" />
-            </div>
-            <div class="ticker-item">
-              <img src="Gowanus images/image 4.png" alt="Image 4" />
-            </div>
-            <div class="ticker-item">
-              <img src="Gowanus images/image 6.png" alt="Image 6" />
-            </div>
-            <!-- duplicate set -->
-            <div class="ticker-item">
-              <img src="Gowanus images/image 5.jpg" alt="Image 5" />
-            </div>
-            <div class="ticker-item">
-              <img src="Gowanus images/image 3.png" alt="Image 3" />
-            </div>
-            <div class="ticker-item">
-              <img src="Gowanus images/image 4.png" alt="Image 4" />
-            </div>
-            <div class="ticker-item">
-              <img src="Gowanus images/image 6.png" alt="Image 6" />
-            </div>
-          </div>
-        </div>
-      </aside>
+      <div id="text-display">
+        <img
+          id="slideshow-image"
+          src="Gowanus images/image 1.png"
+          alt="Gowanus slideshow"
+        />
+        <p id="generated-text" aria-hidden="true">Initializing...</p>
+      </div>
     </div>
+
+    <script src="markov.js"></script>
+    <script src="knobs.js"></script>
+    <script src="app.js"></script>
+
+    <script>
+      const SLIDESHOW_IMAGES = [
+        "Gowanus images/image 1.png",
+        "Gowanus images/image 2.png",
+        "Gowanus images/image 3.png",
+        "Gowanus images/image 4.png",
+        "Gowanus images/image 5.jpg",
+        "Gowanus images/image 6.png",
+        "Gowanus images/Image 7.JPEG",
+      ];
+
+      function startSlideshow() {
+        const imgEl = document.getElementById("slideshow-image");
+        if (!imgEl || SLIDESHOW_IMAGES.length === 0) return;
+        let idx = 0;
+        const swap = () => {
+          imgEl.src = SLIDESHOW_IMAGES[idx];
+          idx = (idx + 1) % SLIDESHOW_IMAGES.length;
+        };
+        swap();
+        setInterval(swap, 4000);
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        initKnobs();
+        initializeMarkov();
+        startSlideshow();
+        // Don't call generateAndDisplay() here - wait for toggle
+      });
+    </script>
   </body>
 </html>
